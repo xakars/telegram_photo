@@ -8,7 +8,7 @@ def feth_spacex_last_launch(url, flight_id=None):
         	'flight_id': flight_id
 	}
 	response = requests.get(url, params=payload)
-	response.raise_for_status
+	response.raise_for_status()
 	all_img_url = response.json()[0]['links']['flickr_images']
 	for img_index, img_url in enumerate(all_img_url):
 		img_name = 'spacex' + str(img_index) + '.jpg'

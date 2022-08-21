@@ -12,7 +12,7 @@ def feth_nasa_daily_photo():
 		'count': 30
 	}
 	response = requests.get(url, params=payload)
-	response.raise_for_status
+	response.raise_for_status()
 	all_img_url = []
 	response_as_json = response.json()
 
@@ -24,6 +24,7 @@ def feth_nasa_daily_photo():
 			continue
 		pic_name = 'nasa' + str(img_index) + get_extension_from_url(img_url)
 		save_image(img_url, 'images_nasa_apod', pic_name)
+
 
 def  main():
 	feth_nasa_daily_photo()
