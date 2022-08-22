@@ -23,7 +23,7 @@ def feth_nasa_daily_photo():
 		if not img_url:
 			continue
 		pic_name = 'nasa' + str(img_index) + get_extension_from_url(img_url)
-		save_image(img_url, 'images_nasa_apod', pic_name)
+		save_image(img_url, 'images', pic_name)
 
 
 def  main():

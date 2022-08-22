@@ -12,7 +12,7 @@ def feth_spacex_last_launch(url, flight_id=None):
 	all_img_url = response.json()[0]['links']['flickr_images']
 	for img_index, img_url in enumerate(all_img_url):
 		img_name = 'spacex' + str(img_index) + '.jpg'
-		save_image(img_url, 'images_spacex', img_name)
+		save_image(img_url, 'images', img_name)
 
 
 def  main():

@@ -23,7 +23,7 @@ def feth_epic_photo():
 		response = requests.get(img_url, params=payload)
 		response.raise_for_status()
 		picname = image + '.png'
-		save_image(response.url, 'images_nasa_epic', picname)
+		save_image(response.url, 'images', picname)
 
 
 def main():
