@@ -6,13 +6,15 @@ import time
 from dotenv import load_dotenv
 
 
-def post_to_chanel(token: str, dalay_time: int):
+def post_to_chanel(token: str, delay_time: int):
     bot = telegram.Bot(token=token)
+    dir_with_imgs = 'images'
     while True:
-        images_name = os.listdir('images')
+        images_name = os.listdir(dir_with_imgs)
         random_img = random.choice(images_name)
-        bot.send_document(chat_id='@devmn_test', document=open(f'images/{random_img}', 'rb'))
-        time.sleep(dalay_time)
+        path = os.path.join(dir_with_imgs, random_img)
+        bot.send_document(chat_id='@devmn_test', document=open(path, 'rb'))
+        time.sleep(delay_time)
 
 
 def main():
