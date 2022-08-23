@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from useful_tools import save_image
 
 
-def feth_epic_photo(token: str, amount_of_images: int):
+def fetch_epic_photo(token: str, amount_of_images: int):
 	url = "https://api.nasa.gov/EPIC/api/natural/all"
 	payload = {
 		'api_key': token
@@ -35,7 +35,7 @@ def main():
 						help='enter amount of images', type=int)
 	args = parser.parse_args()
 	amount_of_images = args.amount_of_images
-	feth_epic_photo(token, amount_of_images)
+	fetch_epic_photo(token, amount_of_images)
 
 if __name__ == '__main__':
 	load_dotenv()

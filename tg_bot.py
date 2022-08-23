@@ -17,16 +17,22 @@ def post_to_chanel(token: str, chat_id: str, delay_time: int):
             bot.send_document(chat_id=chat_id, document=file.read())
         time.sleep(delay_time)
 
-
 def main():
     token = os.environ['TG_TOKEN']
     chat_id = os.environ['TG_CHAT_ID']
     parser = argparse.ArgumentParser()
     parser.add_argument('--delay_time', default=4, help='enter delay time in hours', type=int)
     args = parser.parse_args()
-    delay_time = args.delay_time*3600
-    print(delay_time)
-    post_to_chanel(token, chat_id, delay_time)
+    delay_time = args.delay_time
+    attempts_conn = 0
+    try:
+        post_to_chanel(token, chat_id, delay_time)
+    except telegram.error.NetworkError:
+        if attempts_conn > 0:
+            time.sleep(3)
+        attempts_conn += 1
+        post_to_chanel(token, chat_id, delay_time)
+
 
 if __name__ == '__main__':
     load_dotenv()

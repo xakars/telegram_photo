@@ -3,7 +3,7 @@ import argparse
 from useful_tools import save_image
 
 
-def feth_spacex_last_launch(url):
+def fetch_spacex_last_launch(url):
 	response = requests.get(url)
 	response.raise_for_status()
 	all_img_url = response.json()['links']['flickr']['original']
@@ -24,7 +24,7 @@ def  main():
 		url = f'{url}{flight_id}'
 
 	try:
-		feth_spacex_last_launch(url)
+		fetch_spacex_last_launch(url)
 	except KeyError:
 		print("No latest spacex flight, please enter flight_id and try again")
 

@@ -37,9 +37,10 @@ fetch_nasa_apod_images.py
 ```
 fetch_nasa_apod_images.py --amount_of_images 30
 ```
-Before use tg_bot.py script you need to set TG_TOKEN in .env file. Telegram channel and bot should be already exists
+Before use tg_bot.py script you need to set TG_TOKEN and TG_CHAT_ID in .env file. Telegram channel and bot should be already exists
 ```
 TG_TOKEN=
+TG_CHAT_ID=
 ```
 For publish photo to telegram channel or group run tg_bot.py script.
 ```
