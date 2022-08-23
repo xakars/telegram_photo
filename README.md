@@ -15,22 +15,27 @@ NASA_TOKEN=
 ```
 ### How to use
 
-For download the latest flight photo from SpaceX:
+For download the latest flight photo from SpaceX. You can use **--flight_id** flag for download specific flight photo.
 
 ```
 python3 fetch_spacex_images.py 
 ```
-You can use **--flight_id** flag for download specific flight photo, for example:
 ```
 python3 fetch_spacex_images.py --flight_id 5a9fc479ab70786ba5a1eaaa
 ```
-For download the EPIC photo from NASA:
+For download the EPIC photo from NASA. You can use **--amount_of_images** flag to get specific amount of images(default=30):
 ```
 python3 fetch_nasa_epic_images.py
 ```
-For download the APOD photo from NASA:
+```
+python3 fetch_nasa_epic_images.py --amount_of_images 5
+```
+For download the APOD photo from NASA.You can use --amount_of_images flag to get specific amount of images(default=6):
 ```
 fetch_nasa_apod_images.py
+```
+```
+fetch_nasa_apod_images.py --amount_of_images 30
 ```
 Before use tg_bot.py script you need to set TG_TOKEN in .env file. Telegram channel and bot should be already exists
 ```
