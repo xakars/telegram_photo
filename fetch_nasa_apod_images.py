@@ -6,10 +6,10 @@ from useful_tools import save_image
 from useful_tools import get_extension_from_url
 
 
-def feth_nasa_daily_photo(amount_of_images: int):
+def feth_nasa_daily_photo(token: str, amount_of_images: int):
 	url = "https://api.nasa.gov/planetary/apod"
 	payload = {
-		'api_key': os.environ['NASA_TOKEN'],
+		'api_key': token,
 		'count': amount_of_images
 	}
 	response = requests.get(url, params=payload)
@@ -28,12 +28,13 @@ def feth_nasa_daily_photo(amount_of_images: int):
 
 
 def  main():
+	token = os.environ['NASA_TOKEN']
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--amount_of_images', default=30,
 						help='enter amount of images', type=int)
 	args = parser.parse_args()
 	amount_of_images = args.amount_of_images
-	feth_nasa_daily_photo(amount_of_images)
+	feth_nasa_daily_photo(token, amount_of_images)
 
 if __name__ == '__main__':
 	load_dotenv()
