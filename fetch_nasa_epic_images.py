@@ -5,10 +5,10 @@ from dotenv import load_dotenv
 from useful_tools import save_image
 
 
-def feth_epic_photo(amount_of_images: int):
+def feth_epic_photo(token: str, amount_of_images: int):
 	url = "https://api.nasa.gov/EPIC/api/natural/all"
 	payload = {
-		'api_key': os.environ['NASA_TOKEN']
+		'api_key': token
 	}
 	response = requests.get(url, params=payload)
 	response.raise_for_status()
@@ -17,9 +17,10 @@ def feth_epic_photo(amount_of_images: int):
 		url = f"https://api.nasa.gov/EPIC/api/natural/date/{date}"
 		response = requests.get(url, params=payload)
 		response.raise_for_status()
-		img_date = response.json()[0]['date'].split()[0]
+		response_as_json = response.json()
+		img_date = response_as_json[0]['date'].split()[0]
 		img_date_for_url = img_date.replace('-', '/')
-		image = response.json()[0]['image']
+		image = response_as_json[0]['image']
 		img_url = f"https://api.nasa.gov/EPIC/archive/natural/{img_date_for_url}/png/{image}.png"
 		response = requests.get(img_url, params=payload)
 		response.raise_for_status()
@@ -28,12 +29,13 @@ def feth_epic_photo(amount_of_images: int):
 
 
 def main():
+	token = os.environ['NASA_TOKEN']
 	parser = argparse.ArgumentParser()
 	parser.add_argument('--amount_of_images', default=6,
 						help='enter amount of images', type=int)
 	args = parser.parse_args()
 	amount_of_images = args.amount_of_images
-	feth_epic_photo(amount_of_images)
+	feth_epic_photo(token, amount_of_images)
 
 if __name__ == '__main__':
 	load_dotenv()

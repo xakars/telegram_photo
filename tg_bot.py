@@ -6,8 +6,8 @@ import time
 from dotenv import load_dotenv
 
 
-def post_to_chanel(dalay_time):
-    bot = telegram.Bot(token=os.environ['TG_TOKEN'])
+def post_to_chanel(token: str, dalay_time: int):
+    bot = telegram.Bot(token=token)
     while True:
         images_name = os.listdir('images')
         random_img = random.choice(images_name)
@@ -16,6 +16,7 @@ def post_to_chanel(dalay_time):
 
 
 def main():
+    token = os.environ['TG_TOKEN']
     parser = argparse.ArgumentParser()
     parser.add_argument('--delay_time', help='enter delay time in hours', type=int)
     args = parser.parse_args()
@@ -24,7 +25,7 @@ def main():
         delay_time = 4*3600
     else:
         delay_time *= 3600
-    post_to_chanel(delay_time)
+    post_to_chanel(token, delay_time)
 
 if __name__ == '__main__':
     load_dotenv()
