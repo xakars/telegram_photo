@@ -22,13 +22,10 @@ def main():
     token = os.environ['TG_TOKEN']
     chat_id = os.environ['TG_CHAT_ID']
     parser = argparse.ArgumentParser()
-    parser.add_argument('--delay_time', help='enter delay time in hours', type=int)
+    parser.add_argument('--delay_time', default=4, help='enter delay time in hours', type=int)
     args = parser.parse_args()
-    delay_time = args.delay_time
-    if not delay_time:
-        delay_time = 4*3600
-    else:
-        delay_time *= 3600
+    delay_time = args.delay_time*3600
+    print(delay_time)
     post_to_chanel(token, chat_id, delay_time)
 
 if __name__ == '__main__':
