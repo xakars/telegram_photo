@@ -23,7 +23,7 @@ def fetch_nasa_daily_photo(token: str, amount_of_images: int):
 	for img_index, img_url in enumerate(all_img_url):
 		if not img_url:
 			continue
-		pic_name = f"nasa{str(img_index)}{get_extension_from_url(img_url)}"
+		pic_name = f"nasa{img_index}{get_extension_from_url(img_url)}"
 		save_image(img_url, 'images', pic_name)
 
 
