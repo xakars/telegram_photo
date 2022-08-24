@@ -14,11 +14,8 @@ def fetch_nasa_daily_photo(token: str, amount_of_images: int):
 	}
 	response = requests.get(url, params=payload)
 	response.raise_for_status()
-	all_img_url = []
 	response_as_json = response.json()
-
-	for response in response_as_json:
-		all_img_url.append(response.get('hdurl'))
+	all_img_url = [response.get('hdurl') for response in response_as_json]
 
 	for img_index, img_url in enumerate(all_img_url):
 		if not img_url:
