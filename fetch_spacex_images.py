@@ -14,14 +14,10 @@ def fetch_spacex_last_launch(url):
 
 def  main():
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--flight_id', help='enter flight_id')
+	parser.add_argument('--flight_id', default='latest', help='enter flight_id')
 	args = parser.parse_args()
 	flight_id = args.flight_id
-	url = f'https://api.spacexdata.com/v5/launches/'
-	if not flight_id:
-		url = f'{url}latest'
-	else:
-		url = f'{url}{flight_id}'
+	url = f'https://api.spacexdata.com/v5/launches/{flight_id}'
 
 	try:
 		fetch_spacex_last_launch(url)
