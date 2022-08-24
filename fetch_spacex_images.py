@@ -18,11 +18,7 @@ def  main():
 	args = parser.parse_args()
 	flight_id = args.flight_id
 	url = f'https://api.spacexdata.com/v5/launches/{flight_id}'
-
-	try:
-		fetch_spacex_last_launch(url)
-	except KeyError:
-		print("No latest spacex flight, please enter flight_id and try again")
+	fetch_spacex_last_launch(url)
 
 if __name__ == '__main__':
 	main()

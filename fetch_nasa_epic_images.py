@@ -17,10 +17,10 @@ def fetch_epic_photo(token: str, amount_of_images: int):
 		url = f"https://api.nasa.gov/EPIC/api/natural/date/{date}"
 		response = requests.get(url, params=payload)
 		response.raise_for_status()
-		response_as_json = response.json()
-		img_date = response_as_json[0]['date'].split()[0]
+		parsed_response = response.json()[0]
+		img_date = parsed_response['date'].split()[0]
 		img_date_for_url = img_date.replace('-', '/')
-		image = response_as_json[0]['image']
+		image = parsed_response['image']
 		img_url = f"https://api.nasa.gov/EPIC/archive/natural/{img_date_for_url}/png/{image}.png"
 		response = requests.get(img_url, params=payload)
 		response.raise_for_status()
