@@ -3,6 +3,7 @@ import argparse
 import os
 from dotenv import load_dotenv
 from useful_tools import save_image
+from datetime import datetime
 
 
 def fetch_epic_photo(token: str, amount_of_images: int):
@@ -12,15 +13,15 @@ def fetch_epic_photo(token: str, amount_of_images: int):
 	}
 	response = requests.get(url, params=payload)
 	response.raise_for_status()
-	for response in response.json()[:amount_of_images]:
-		date = response['date']
+	for images_date  in response.json()[:amount_of_images]:
+		date = images_date['date']
 		url = f"https://api.nasa.gov/EPIC/api/natural/date/{date}"
 		response = requests.get(url, params=payload)
 		response.raise_for_status()
-		parsed_response = response.json()[0]
-		img_date = parsed_response['date'].split()[0]
-		img_date_for_url = img_date.replace('-', '/')
-		image = parsed_response['image']
+		image_metadata = response.json()[0]
+		img_date = image_metadata['date'].split()[0]
+		img_date_for_url = datetime.strftime(datetime.fromisoformat(img_date), "%Y/%m/%d")
+		image = image_metadata['image']
 		img_url = f"https://api.nasa.gov/EPIC/archive/natural/{img_date_for_url}/png/{image}.png"
 		response = requests.get(img_url, params=payload)
 		response.raise_for_status()
