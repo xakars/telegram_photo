@@ -1,5 +1,6 @@
 import requests
 from pathlib import Path
+from urllib.parse import urlparse, unquote, urlsplit
 import os
 
 
@@ -13,4 +14,7 @@ def save_image(url, path, picname):
 
 
 def get_extension_from_url(url):
-	return os.path.splitext(url)[1]
+	parsed_url = urlparse(unquote(url))
+	filename = os.path.split(parsed_url.path)[1]
+	extension = os.path.splitext(filename)[1]
+	return extension

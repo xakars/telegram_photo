@@ -17,6 +17,7 @@ def post_to_chanel(token: str, chat_id: str, delay_time: int):
         try:
             with open(path, 'rb') as file:
                 bot.send_document(chat_id=chat_id, document=file.read())
+            attempts_conn = 0
         except telegram.error.NetworkError:
             print("Are you connected to your internet?")
             attempts_conn += 1
