@@ -6,16 +6,15 @@ from useful_tools import save_image
 from useful_tools import get_extension_from_url
 
 
-def fetch_nasa_daily_photo(token: str, amount_of_images: int):
+def fetch_nasa_daily_photo(token: str, amt_img: int):
 	url = "https://api.nasa.gov/planetary/apod"
 	payload = {
 		'api_key': token,
-		'count': amount_of_images
+		'count': amt_img
 	}
 	response = requests.get(url, params=payload)
 	response.raise_for_status()
-	response_as_json = response.json()
-	all_img_url = [response.get('hdurl') for response in response_as_json]
+	all_img_url = [response.get('hdurl') for response in response.json()]
 
 	for img_index, img_url in enumerate(all_img_url):
 		if not img_url:
@@ -24,14 +23,14 @@ def fetch_nasa_daily_photo(token: str, amount_of_images: int):
 		save_image(img_url, 'images', pic_name)
 
 
-def  main():
+def main():
 	token = os.environ['NASA_TOKEN']
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--amount_of_images', default=30,
+	parser.add_argument('--amt_img', default=30,
 						help='enter amount of images', type=int)
 	args = parser.parse_args()
-	amount_of_images = args.amount_of_images
-	fetch_nasa_daily_photo(token, amount_of_images)
+	amt_img = args.amt_img
+	fetch_nasa_daily_photo(token, amt_img)
 
 if __name__ == '__main__':
 	load_dotenv()

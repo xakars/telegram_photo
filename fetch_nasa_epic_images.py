@@ -6,14 +6,14 @@ from useful_tools import save_image
 from datetime import datetime
 
 
-def fetch_epic_photo(token: str, amount_of_images: int):
+def fetch_epic_photo(token: str, amt_img: int):
 	url = "https://api.nasa.gov/EPIC/api/natural/all"
 	payload = {
 		'api_key': token
 	}
 	response = requests.get(url, params=payload)
 	response.raise_for_status()
-	for images_date  in response.json()[:amount_of_images]:
+	for images_date  in response.json()[:amt_img]:
 		date = images_date['date']
 		url = f"https://api.nasa.gov/EPIC/api/natural/date/{date}"
 		response = requests.get(url, params=payload)
@@ -32,11 +32,11 @@ def fetch_epic_photo(token: str, amount_of_images: int):
 def main():
 	token = os.environ['NASA_TOKEN']
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--amount_of_images', default=6,
+	parser.add_argument('--amt_img', default=6,
 						help='enter amount of images', type=int)
 	args = parser.parse_args()
-	amount_of_images = args.amount_of_images
-	fetch_epic_photo(token, amount_of_images)
+	amt_img = args.amt_img
+	fetch_epic_photo(token, amt_img)
 
 if __name__ == '__main__':
 	load_dotenv()
