@@ -5,9 +5,9 @@ from dotenv import load_dotenv
 from useful_tools import get_extension_from_url, save_image
 
 
-def fetch_nasa_daily_photo(token: str, amt_img: int):
+def fetch_nasa_daily_photo(token: str, count_img: int):
     url = "https://api.nasa.gov/planetary/apod"
-    payload = {"api_key": token, "count": amt_img}
+    payload = {"api_key": token, "count": count_img}
     response = requests.get(url, params=payload)
     response.raise_for_status()
     all_img_url = [response.get("hdurl") for response in response.json()]
@@ -23,11 +23,11 @@ def main():
     token = os.environ["NASA_TOKEN"]
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--amt_img", default=30, help="enter amount of images", type=int
+        "--count_img", default=30, help="enter amount of images", type=int
     )
     args = parser.parse_args()
-    amt_img = args.amt_img
-    fetch_nasa_daily_photo(token, amt_img)
+    count_img = args.count_img
+    fetch_nasa_daily_photo(token, count_img)
 
 
 if __name__ == "__main__":
